@@ -150,7 +150,7 @@
                     sortBy: ''
                 },
                 created: function(){
-                    fetch('https://afterschoolactivities.herokuapp.com/collection/products/').then(
+                    fetch('https://afterschoolactivities.herokuapp.com/collection/products').then(
                         function(response){
                             response.json().then(
                                 function(json){
@@ -188,32 +188,34 @@
                     checkout(){
                         this.showProduct = this.showProduct ? false : true;
                     },
-                    updateStock(){
-                        fetch('https://afterschoolactivities.herokuapp.com/collection/products/', {
-                            method: 'PUT',
-                            headers: {
-                            'Content-Type' : 'application/json'
-                            },
-                            body: JSON.stringify(this.order),
-                        }).then((response) => response.json())
-                                .catch(function (error) {
-                                    console.log(error);
-                                    alert("Looks like there was a problem: \n", error);
-                                }); 
-                    },
+                    // updateStock(){
+                    //     fetch('https://afterschoolactivities.herokuapp.com/collection/Order', {
+                    //         method: 'PUT',
+                    //         mode: "cors",
+                    //         cache: "no-store",
+                    //         headers: {
+                    //         'Content-Type' : 'application/json'
+                    //         },
+                    //         body: JSON.stringify(this.order),
+                    //     }).then((response) => response.json())
+                    //             .catch(function (error) {
+                    //                 console.log(error);
+                    //                 alert("Looks like there was a problem: \n", error);
+                    //             }); 
+                    // },
                     confirmOrder(){
                         for(var i=0; i < this.cart.length; i++){
                             var prodSchema = {id: this.cart[i].id, space: this.cart[i].inCart}
                             this.order.prods.push(prodSchema);
                         }
-                        this.updateStock();
-                        fetch('https://afterschoolactivities.herokuapp.com/collection/Order/', {
+                        fetch('https://afterschoolactivities.herokuapp.com/collection/products', {
                             method: 'POST',
                             headers: {
                             'Content-Type' : 'application/json',
                             },
                             body: JSON.stringify(this.order),
                         });
+                        //this.updateStock();
                         
                         alert('Order placed successfully!');
                     }
