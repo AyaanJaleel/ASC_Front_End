@@ -189,7 +189,7 @@
                         this.showProduct = this.showProduct ? false : true;
                     },
                     updateStock(){
-                        fetch('http://localhost:3000/collection/products', {
+                        fetch('https://afterschoolactivities.herokuapp.com/collection/Order', {
                             method: 'PUT',
                             headers: {
                             'Content-Type' : 'application/json'
@@ -207,7 +207,7 @@
                             this.order.prods.push(prodSchema);
                         }
                         this.updateStock();
-                        fetch('http://localhost:3000/collection/Order', {
+                        fetch('https://afterschoolactivities.herokuapp.com/collection/Order', {
                             method: 'POST',
                             headers: {
                             'Content-Type' : 'application/json',
